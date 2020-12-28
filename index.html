@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <title>NEW YEAR COUNTDOWN</title>
     <style>
         html,
@@ -102,6 +104,27 @@
             }
         }
 
+        audio {
+            display: none;
+        }
+
+        button {
+            background-color: transparent;
+            font-size: 16px;
+            border: none;
+            color: #89ff01;
+            margin-bottom: 20px;
+        }
+
+        button:focus {
+            outline: none;
+            border: none;
+        }
+
+        button .bx {
+            vertical-align: middle;
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -111,8 +134,14 @@
 
 
     <div class="main-box">
-
+        <audio controls autoplay>
+            <source src="sound.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <h4>Days Left for</h4>
         <h1 class="title">2021</h1>
+        <button>Burn Firecrackers <i class='bx bx-play'></i></button>
+
 
         <!-- countdown element -->
         <div id="countdown-box" class="cdb">
@@ -137,7 +166,29 @@
             </div>
         </div>
     </div>
+    <script>
+        window.addEventListener('load', () => {
+            const audio = document.querySelector('audio');
+            const button = document.querySelector('button');
+            let isPlaying = false;
 
+            button.addEventListener("click", event => {
+                /* the audio is now playable; play it if permissions allow */
+                if (!isPlaying) {
+                    isPlaying = true;
+                    audio.play();
+                    button.innerHTML = "Stop Noise Pollution <i class='bx bx-pause'></i>";
+                } else {
+                    isPlaying = false;
+                    audio.pause();
+                    button.innerHTML = "Burn Firecrackers <i class='bx bx-play'></i>";
+                }
+
+            });
+
+
+        })
+    </script>
     <script>
         // Set date
         var countdownDate = new Date(
@@ -477,9 +528,6 @@
         window.addEventListener("resize", onResize);
 
         window.onload = update;
-
     </script>
 
-</body>
-
-</html>
+</body></html>
